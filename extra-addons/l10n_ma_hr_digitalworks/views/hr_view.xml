@@ -14,7 +14,7 @@
             <field name="inherit_id" ref="hr.view_employee_form"/>
             <field name="model">hr.employee</field>
             <field name="arch" type="xml">
-                <xpath expr="//div[@class='oe_title']" position="after">
+                <xpath expr="//field[@name='name']" position="after">
                     <div class="oe_title">
                         <label for="matricule_dw" class="oe_edit_only"/>
                         <h1>
@@ -44,7 +44,15 @@
 		<xpath expr="//field[@name='address_home_id']" position="after">
                     <field name="adresse_personnelle"/>
 		    <field name="ville_personnelle"/>
-                </xpath>
+        </xpath>
+
+        <xpath expr="//field[@name='address_home_id']" position="attributes">
+                    <attribute name="invisible">True</attribute>
+        </xpath>
+
+        <xpath expr="//field[@name='identification_id']" position="attributes">
+                    <attribute name="invisible">True</attribute>
+        </xpath>
 	
 
 		<xpath expr="//field[@name='passport_id']" position="after">
@@ -102,6 +110,77 @@
                             </group>
                             <group string="Dates Dépôts" attrs="{'invisible':[('children', '=', 0)]}">
                                 <field name="date_depot_enfant_actnaissance"/>
+                            </group>
+
+                        </group>
+                    </page>
+                </xpath>
+
+
+                <xpath expr="//notebook/page[4]" position="after">
+                    <page string="Suivi Administratif Collaborateur">
+                        <group>
+                            <group string="Contrat Travail">
+                                <field name="contract_remis_pr_sign"/>
+                                <field name="contract_recu_sign_leg"/>
+                                <field name="contract_en_cours_sign"/>
+                                <field name="contract_remis_sign"/>
+                            </group>
+                            <group string="Dates importantes">
+                                <field name="date_contract_remis_pr_sign"/>
+                                <field name="date_contract_recu_sign_leg"/>
+                                <!--<field name="date_contract_en_cours_sign"/>-->
+                                <field name="date_contract_remis_sign"/>
+                            </group>
+
+                            <group string="Chartes">
+                                <field name="rgl_remis_au_col"/>
+                                <field name="faute_grave"/>
+                                <field name="charte_info_remis"/>
+                                <field name="regl_recu_sign"/>
+                                <field name="faute_grave_recu_sign"/>
+                                <field name="charte_info_recu_sign"/>
+                            </group>
+                            <group string="Dates importantes">
+                                <field name="date_rgl_remis_au_col"/>
+                                <field name="date_faute_grave"/>
+                                <field name="date_charte_info_remis"/>
+                                <field name="date_regl_recu_sign"/>
+                                <field name="date_faute_grave_recu_sign"/>
+                                <field name="date_charte_info_recu_sign"/>
+                            </group>
+
+                        </group>
+                    </page>
+                </xpath>
+
+                 <xpath expr="//notebook/page[5]" position="after">
+                    <page string="CNSS-SAHAM">
+                        <group>
+                            <group string="CNSS">
+                                <field name="form_remis_pr_sign"/>
+                                <field name="form_transmis_cnss"/>
+                                <field name="carte_recu"/>
+                                <field name="carte_remise"/>
+                            </group>
+                            <group string="Dates importantes">
+                                <field name="date_form_remis"/>
+                                <field name="date_form_transmis"/>
+                                <field name="date_carte_recu"/>
+                                <field name="date_catre_remise"/>
+                            </group>
+
+                            <group string="SAHAM">
+                                <field name="bds_remis"/>
+                                <field name="bds_recu"/>
+                                <field name="bds_transmis_saham"/>
+                                <field name="photo_transmis_securt"/>
+                            </group>
+                            <group string="Dates importantes">
+                                <field name="date_bds_remis"/>
+                                <field name="date_bds_recu"/>
+                                <field name="date_bds_transmis_saham"/>
+                                <field name="date_photo_transmis_securt"/>
                             </group>
 
                         </group>
