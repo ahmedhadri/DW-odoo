@@ -171,8 +171,60 @@ class HrEmployee(models.Model):
 
     #####  => Enfants ####
     has_enfant_actnaissance = fields.Boolean(u'Check Acte Naissance', default=False)
-
     date_depot_enfant_actnaissance = fields.Datetime('Date Depot Acte Naissance')
+
+    ##### Suivi administratif Collaborateur ####
+    ##### Contrat de travail #####
+    contract_remis_pr_sign = fields.Boolean('Contrat remis pour signature', default=False)
+    contract_recu_sign_leg = fields.Boolean(u'Contrat reçu signé et légalisé', default=False)
+    contract_en_cours_sign = fields.Boolean('Contrat en cours de signature', default=False)
+    contract_remis_sign = fields.Boolean(u'Contrat signé remis', default=False)
+
+    date_contract_remis_pr_sign = fields.Datetime('Date de remise du contrat')
+    date_contract_recu_sign_leg = fields.Datetime('Date de reception du contrat')
+    # date_contract_en_cours_sign = fields.Integer(string="Durée ...")
+    date_contract_remis_sign = fields.Datetime(u'Date de remise du contrat signé')
+
+    #### Charte ####
+
+    rgl_remis_au_col = fields.Boolean(u'Règlement intérieur remis', default=False)
+    faute_grave = fields.Boolean(u'Fautes graves remises', default=False)
+    charte_info_remis = fields.Boolean('charte informatique remise', default=False)
+    regl_recu_sign = fields.Boolean(u'Règlement intérieur reçu signé', default=False)
+    faute_grave_recu_sign = fields.Boolean(u'Fautes graves reçues signées', default=False)
+    charte_info_recu_sign = fields.Boolean(u'charte informatique reçue signée', default=False)
+
+    date_rgl_remis_au_col = fields.Datetime(u'Date de remise du réglement intérieur')
+    date_faute_grave = fields.Datetime('Date de remise des fautes graves')
+    date_charte_info_remis = fields.Datetime('Date de remise de la charte informatique')
+    date_regl_recu_sign = fields.Datetime(u'Date de signature du réglement intérieur')
+    date_faute_grave_recu_sign = fields.Datetime(u'Date de signature fautes graves')
+    date_charte_info_recu_sign = fields.Datetime(u'Date de signature de la charte informatique')
+
+    ##### CNSS & SAHAM ####
+    ##### CNSS #####
+
+    form_remis_pr_sign = fields.Boolean('Formulaire remis pour signature', default=False)
+    form_transmis_cnss = fields.Boolean(u'Formulaire transmis à la CNSS', default=False)
+    carte_recu = fields.Boolean(u'Carte reçue', default=False)
+    carte_remise = fields.Boolean('Carte remise au collaborateur', default=False)
+
+    date_form_remis = fields.Datetime('Date de remise')
+    date_form_transmis = fields.Datetime(u'Date de transmission à la CNSS')
+    date_carte_recu = fields.Datetime('Date de reception de la carte')
+    date_catre_remise= fields.Datetime('Date de remise de la carte')
+
+    ##### SAHAM #####
+
+    bds_remis = fields.Boolean('BDS remis au collaborateur', default=False)
+    bds_recu = fields.Boolean(u'BDS reçu par le collborateur', default=False)
+    bds_transmis_saham = fields.Boolean(u'BDS Transmis à SAHAM', default=False)
+    photo_transmis_securt = fields.Boolean(u'Photo transmise à la sécurité', default=False)
+
+    date_bds_remis = fields.Datetime('Date de remise de BDS')
+    date_bds_recu = fields.Datetime('Date de reception de BDS')
+    date_bds_transmis_saham = fields.Datetime(u'Date de transmission de BDS à SAHAM')
+    date_photo_transmis_securt = fields.Datetime(u'Date de transmission de la photo à la sécurité')
 
     _sql_constraints = [
         ('matricule_dw', 'unique(matricule_dw)',
@@ -185,15 +237,15 @@ class HrEmployee(models.Model):
             self.date_depot_cin = fields.Datetime.now()
         if (self.has_diplome):
             self.date_depot_diplome = fields.Datetime.now()
-        if (self.has_passport):
-            self.date_depot_passport = fields.Datetime.now()
+        # if (self.has_passport):
+        #     self.date_depot_passport = fields.Datetime.now()
 
 
 class EmployeeDWGrde(models.Model):
     _name = "hr.employee.dw.grade"
     _description = "Employee DW Grade"
 
-    name = fields.Char(string="Categorie", required=True)
+    name = fields.Char(string="Grade", required=True)
     salaire_base = fields.Float(u'Salaire de base')
     salaire_net = fields.Float(u'Salaire Net')
     indimnite_transport = fields.Float(u'Indimnité Transport')
