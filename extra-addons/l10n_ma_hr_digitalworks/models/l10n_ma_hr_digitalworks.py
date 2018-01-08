@@ -251,6 +251,11 @@ class EmployeeDWGrde(models.Model):
     indimnite_transport = fields.Float(u'Indimnité Transport')
     indimnite_panier = fields.Float(u'Indimnité Panier')
 
+    @api.onchange('indimnite_panier', 'indimnite_transport', 'salaire_base')
+    def _onchange_indimnite_salaire(self):
+        """ This function compute salaire net"""
+        self.salaire_net = self.salaire_base + self.indimnite_panier + self.indimnite_transport
+
 class EmployeeDWCategory(models.Model):
     _name = "hr.employee.dw.category"
     _description = "Employee DW Category"
