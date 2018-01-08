@@ -37,37 +37,45 @@
                     <attribute name="invisible">True</attribute>
                 </xpath>
 		
-		<xpath expr="//field[@name='department_id']" position="before">
-                    <field name="company_id"/>
+                <xpath expr="//field[@name='department_id']" position="before">
+                            <field name="company_id"/>
                 </xpath>
-		
-		<xpath expr="//field[@name='address_home_id']" position="after">
-                    <field name="adresse_personnelle"/>
-		    <field name="ville_personnelle"/>
-        </xpath>
 
-        <xpath expr="//field[@name='address_home_id']" position="attributes">
-                    <attribute name="invisible">True</attribute>
-        </xpath>
+                <xpath expr="//field[@name='address_home_id']" position="after">
+                            <field name="adresse_personnelle"/>
+                            <field name="ville_personnelle"/>
+                </xpath>
 
-        <xpath expr="//field[@name='identification_id']" position="attributes">
-                    <attribute name="invisible">True</attribute>
-        </xpath>
+                <xpath expr="//field[@name='address_home_id']" position="attributes">
+                            <attribute name="invisible">True</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='identification_id']" position="attributes">
+                            <attribute name="invisible">True</attribute>
+                </xpath>
 	
 
-		<xpath expr="//field[@name='passport_id']" position="after">
-                    <field name="date_expiration_passport"/>
-					<field name="cin"/>
-					<field name="date_expiration_cin"/>
-					<field name="num_carte_sejour"/>
-					<field name="date_expiration_carte_sejour"/>
+                <xpath expr="//field[@name='passport_id']" position="after">
+                            <field name="date_expiration_passport"/>
+                            <field name="cin"/>
+                            <field name="date_expiration_cin"/>
+                            <field name="num_carte_sejour"/>
+                            <field name="date_expiration_carte_sejour"/>
                 </xpath>
-		<xpath expr="//notebook/page[2]/group/group[2]" position="after">
-                           <group string="Numéros d'affiliation">
-								<field name="matricule_cnss"/>
-								<field name="matricule_cimr"/>
-								<field name="matricule_mut"/>
-							</group>
+
+                <xpath expr="//notebook/page[2]/group/group[2]" position="after">
+                                   <group string="Numéro de Compte Bancaire">
+                                        <field name="account_bank_number"/>
+                                        <field name="bank_id"/>
+                                    </group>
+                </xpath>
+
+                <xpath expr="//notebook/page[2]/group/group[3]" position="after">
+                                   <group string="Numéros d'affiliation">
+                                        <field name="matricule_cnss"/>
+                                        <field name="matricule_cimr"/>
+                                        <field name="matricule_mut"/>
+                                    </group>
                 </xpath>
 		
 
@@ -196,9 +204,14 @@
             <field name="arch" type="xml">
                 <form string="Grade">
                     <sheet>
+                        <div class="oe_title">
+                            <label for="name" class="oe_edit_only"/>
+                            <h1>
+                                <field name="name"/>
+                            </h1>
+                        </div>
                         <group name="employee_category_data">
                             <group>
-                                <field name="name"/>
                                 <field name="salaire_net"/>
                                 <field name="salaire_base"/>
                             </group>
@@ -212,11 +225,24 @@
             </field>
         </record>
 
+
+        <record model="ir.ui.view" id="hr_employee_form_extension_2">
+            <field name="name">hr.employee form extension 2</field>
+            <field name="inherit_id" ref="hr_contract.hr_hr_employee_view_form2"/>
+            <field name="model">hr.employee</field>
+            <field name="arch" type="xml">
+                    <xpath expr="//field[@name='bank_account_id']" position="attributes">
+                        <attribute name="invisible">True</attribute>
+                    </xpath>
+            </field>
+        </record>
+
         <record id="view_hr_dw_grade_tree" model="ir.ui.view">
             <field name="name">hr.emp.dw.grade.tree</field>
             <field name="model">hr.employee.dw.grade</field>
             <field name="arch" type="xml">
-                <tree string="Grade" decoration-bf="message_needaction==True">
+                <!--<tree string="Grade" decoration-bf="message_needaction==True">-->
+                <tree string="Grade">
                     <field name="name"/>
                     <field name="salaire_base"/>
                     <field name="salaire_net"/>

@@ -48,8 +48,11 @@ class hr_employee(models.Model):
     av_sal = fields.Integer(string="Avance sur Salaire",default=0)   
     rem_mut = fields.Integer(string="Remboursement Mutuelle",default=0)
    	
-	
-    
+	##### information compte bancaire #####
+
+    account_bank_number = fields.Integer(string="Numéro de compte", required=False)
+    bank_id = fields.Many2one('res.bank', string="Banque", help='Select the Bank from which the salary is going to be paid')
+
 		
 
 		
