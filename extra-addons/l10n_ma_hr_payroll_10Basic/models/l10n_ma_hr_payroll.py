@@ -50,7 +50,7 @@ class hr_employee(models.Model):
    	
 	##### information compte bancaire #####
 
-    account_bank_number = fields.Integer(string="Numéro de compte", required=False)
+    account_bank_number = fields.Char(string="Numéro de compte", required=False)
     bank_id = fields.Many2one('res.bank', string="Banque", help='Select the Bank from which the salary is going to be paid')
 
 		
