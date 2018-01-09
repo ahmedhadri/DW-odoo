@@ -133,9 +133,9 @@ class HrEmployee(models.Model):
     adresse_personnelle = fields.Char(string="Adresse Personnelle", required=False)
     ville_personnelle = fields.Char(string="Ville", required=False)
     num_carte_sejour = fields.Char(u'N° Carte Séjour')
-    date_expiration_cin = fields.Datetime('Date Expiration CIN')
-    date_expiration_passport = fields.Datetime('Date Expiration Passport')
-    date_expiration_carte_sejour = fields.Datetime('Date Expiration Carte Sejour')
+    date_expiration_cin = fields.Date('Date Expiration CIN')
+    date_expiration_passport = fields.Date('Date Expiration Passport')
+    date_expiration_carte_sejour = fields.Date('Date Expiration Carte Sejour')
 
     ##### CHECK LIST ####
     ##### Documents Apportés ####
@@ -143,20 +143,29 @@ class HrEmployee(models.Model):
 
     has_cin = fields.Boolean(u'Check CIN', default=False)
     has_carte_sejour = fields.Boolean(u'Check Carte Séjour', default=False)
-    has_photos = fields.Boolean(u'Check Diplome', default=False)
+    has_photos = fields.Boolean(u'Check Photos', default=False)
+    has_passport = fields.Boolean(u'Check Passport', default=False)
     has_fiche_anthropometrique = fields.Boolean(u'Check Fiche Anthropométrique', default=False)
     has_radio_pulmonaire = fields.Boolean(u'Check Radio Pulmonaire', default=False)
     has_justif_salaire = fields.Boolean(u'Check Justif Salaire', default=False)
+    has_rib = fields.Boolean(u'Check RIB', default=False)
+    has_stc = fields.Boolean(u'Check STC', default=False)
+    has_cnss = fields.Boolean(u'Check CNSS', default=False)
     has_attestation_travail = fields.Boolean(u'Check Attestation Travail', default=False)
     has_diplome = fields.Boolean(u'Check Diplome(s)', default=False)
 
-    date_depot_cin = fields.Datetime('Date Depot CIN')
-    date_depot_photos = fields.Datetime('Date Depot Photos')
-    date_depot_fiche_anthropometrique = fields.Datetime('Date Depot Fiche Anthropométrique')
-    date_depot_radio_pulmonaire = fields.Datetime('Date Depot Radio Pulmonaire')
-    date_depot_justif_salaire = fields.Datetime('Date Depot Justif Salaire')
-    date_depot_attestation_travail = fields.Datetime('Date Depot Attestation Travail')
-    date_depot_diplome = fields.Datetime('Date Depot Diplome(s)')
+    date_depot_cin = fields.Datetime(u'Date Dépôt CIN')
+    date_depot_carte_sejour = fields.Datetime(u'Date Dépôt Carte séjour')
+    date_depot_photos = fields.Datetime(u'Date Dépôt Photos')
+    date_depot_passport = fields.Datetime(u'Date Dépôt Passport')
+    date_depot_fiche_anthropometrique = fields.Datetime(u'Date Dépôt Fiche Anthropométrique')
+    date_depot_radio_pulmonaire = fields.Datetime(u'Date Dépôt Radio Pulmonaire')
+    date_depot_justif_salaire = fields.Datetime(u'Date Dépôt Justif Salaire')
+    date_depot_attestation_travail = fields.Datetime(u'Date Dépôt Attestation Travail')
+    date_depot_diplome = fields.Datetime(u'Date Dépôt Diplôme(s)')
+    date_depot_rib = fields.Datetime(u'Date Dépôt RIB')
+    date_depot_stc = fields.Datetime(u'Date Dépôt STC')
+    date_depot_cnss = fields.Datetime(u'Date Dépôt CNSS')
 
     #####  => Conjoint ####
     has_conjoint_actmariage = fields.Boolean(u'Check Acte Marriage', default=False)
@@ -164,14 +173,14 @@ class HrEmployee(models.Model):
     has_conjoint_attestation_travail = fields.Boolean(u'Check Attestation Travail', default=False)
     has_cojoint_cnss = fields.Boolean(u'Check CNSS', default=False)
 
-    date_depot_conjoint_actmariage = fields.Datetime('Date Depot Acte Marriage')
-    date_depot_conjoint_cin = fields.Datetime('Date Depot CIN')
-    date_depot_conjoint_attestation_travail = fields.Datetime('Date Depot Attestation Travail')
-    date_depot_cojoint_cnss = fields.Datetime('Date Depot CNSS')
+    date_depot_conjoint_actmariage = fields.Datetime(u'Date Dépôt Acte Marriage')
+    date_depot_conjoint_cin = fields.Datetime(u'Date Dépôt CIN')
+    date_depot_conjoint_attestation_travail = fields.Datetime(u'Date Dépôt Attestation Travail')
+    date_depot_cojoint_cnss = fields.Datetime(u'Date Dépôt CNSS')
 
     #####  => Enfants ####
     has_enfant_actnaissance = fields.Boolean(u'Check Acte Naissance', default=False)
-    date_depot_enfant_actnaissance = fields.Datetime('Date Depot Acte Naissance')
+    date_depot_enfant_actnaissance = fields.Datetime(u'Date Dépôt Acte Naissance')
 
     ##### Suivi administratif Collaborateur ####
     ##### Contrat de travail #####
@@ -182,7 +191,7 @@ class HrEmployee(models.Model):
 
     date_contract_remis_pr_sign = fields.Datetime('Date de remise du contrat')
     date_contract_recu_sign_leg = fields.Datetime('Date de reception du contrat')
-    # date_contract_en_cours_sign = fields.Integer(string="Durée ...")
+    date_contract_en_cours_sign = fields.Datetime('Date de signature')
     date_contract_remis_sign = fields.Datetime(u'Date de remise du contrat signé')
 
     #### Charte ####
@@ -212,7 +221,7 @@ class HrEmployee(models.Model):
     date_form_remis = fields.Datetime('Date de remise')
     date_form_transmis = fields.Datetime(u'Date de transmission à la CNSS')
     date_carte_recu = fields.Datetime('Date de reception de la carte')
-    date_catre_remise= fields.Datetime('Date de remise de la carte')
+    date_carte_remise= fields.Datetime('Date de remise de la carte')
 
     ##### SAHAM #####
 
@@ -231,15 +240,226 @@ class HrEmployee(models.Model):
          'The Employee DW Matricule must be unique across the company(s).'),
     ]
 
+    ######################################################
+    #### on_change method for document admin checkbox ####
+    ######################################################
     @api.onchange('has_cin')
     def _onchange_has_cin(self):
         if (self.has_cin):
             self.date_depot_cin = fields.Datetime.now()
+        else:
+            self.date_depot_cin = False
+
+    @api.onchange('has_diplome')
+    def _onchange_has_diplome(self):
         if (self.has_diplome):
             self.date_depot_diplome = fields.Datetime.now()
-        # if (self.has_passport):
-        #     self.date_depot_passport = fields.Datetime.now()
+        else:
+            self.date_depot_diplome = False
 
+    @api.onchange('has_carte_sejour')
+    def _onchange_has_carte_sejour(self):
+        if (self.has_carte_sejour):
+            self.date_depot_carte_sejour = fields.Datetime.now()
+        else:
+            self.date_depot_carte_sejour = False
+
+    @api.onchange('has_photos')
+    def _onchange_has_photos(self):
+        if (self.has_photos):
+            self.date_depot_photos = fields.Datetime.now()
+        else:
+            self.date_depot_photos = False
+
+    @api.onchange('has_passport')
+    def _onchange_has_passport(self):
+        if (self.has_passport):
+            self.date_depot_passport = fields.Datetime.now()
+        else:
+            self.date_depot_passport = False
+
+    @api.onchange('has_fiche_anthropometrique')
+    def _onchange_has_fiche_anthropometrique(self):
+        if (self.has_fiche_anthropometrique):
+            self.date_depot_fiche_anthropometrique = fields.Datetime.now()
+        else:
+            self.date_depot_fiche_anthropometrique = False
+
+    @api.onchange('has_radio_pulmonaire')
+    def _onchange_has_radio_pulmonaire(self):
+        if (self.has_radio_pulmonaire):
+            self.date_depot_radio_pulmonaire = fields.Datetime.now()
+        else:
+            self.date_depot_radio_pulmonaire = False
+
+    @api.onchange('has_justif_salaire')
+    def _onchange_has_justif_salaire(self):
+        if (self.has_justif_salaire):
+            self.date_depot_justif_salaire = fields.Datetime.now()
+        else:
+            self.date_depot_justif_salaire = False
+
+    @api.onchange('has_rib')
+    def _onchange_has_rib(self):
+        if (self.has_rib):
+            self.date_depot_rib = fields.Datetime.now()
+        else:
+            self.date_depot_rib = False
+
+    @api.onchange('has_stc')
+    def _onchange_has_stc(self):
+        if (self.has_stc):
+            self.date_depot_stc = fields.Datetime.now()
+        else:
+            self.date_depot_stc = False
+
+    @api.onchange('has_cnss')
+    def _onchange_has_cnss(self):
+        if (self.has_cnss):
+            self.date_depot_cnss = fields.Datetime.now()
+        else:
+            self.date_depot_cnss = False
+
+    @api.onchange('has_attestation_travail')
+    def _onchange_has_attestation_travail(self):
+        if (self.has_attestation_travail):
+            self.date_depot_attestation_travail = fields.Datetime.now()
+        else:
+            self.date_depot_attestation_travail = False
+    ###############################################
+    #### on_change method for Contrat checkbox ####
+    ###############################################
+    @api.onchange('contract_remis_pr_sign')
+    def _onchange_contract_remis_pr_sign(self):
+        if (self.contract_remis_pr_sign):
+            self.date_contract_remis_pr_sign = fields.Datetime.now()
+        else:
+            self.date_contract_remis_pr_sign = False
+
+    @api.onchange('contract_recu_sign_leg')
+    def _onchange_contract_recu_sign_leg(self):
+        if (self.contract_recu_sign_leg):
+            self.date_contract_recu_sign_leg = fields.Datetime.now()
+        else:
+            self.date_contract_recu_sign_leg = False
+
+    @api.onchange('contract_en_cours_sign')
+    def _onchange_contract_en_cours_sign(self):
+        if (self.contract_en_cours_sign):
+            self.date_contract_en_cours_sign = fields.Datetime.now()
+        else:
+            self.date_contract_en_cours_sign = False
+
+    @api.onchange('contract_remis_sign')
+    def _onchange_contract_remis_sign(self):
+        if (self.contract_remis_sign):
+            self.date_contract_remis_sign = fields.Datetime.now()
+        else:
+            self.date_contract_remis_sign = False
+
+    ############################################
+    #### on_change method for CHARTE checkbox ####
+    ############################################
+    @api.onchange('rgl_remis_au_col')
+    def _onchange_rgl_remis_au_col(self):
+        if (self.rgl_remis_au_col):
+            self.date_rgl_remis_au_col = fields.Datetime.now()
+        else:
+            self.date_rgl_remis_au_col = False
+
+    @api.onchange('faute_grave')
+    def _onchange_faute_grave(self):
+        if (self.faute_grave):
+            self.date_faute_grave = fields.Datetime.now()
+        else:
+            self.date_faute_grave = False
+
+    @api.onchange('charte_info_remis')
+    def _onchange_charte_info_remis(self):
+        if (self.charte_info_remis):
+            self.date_charte_info_remis = fields.Datetime.now()
+        else:
+            self.date_charte_info_remis = False
+
+    @api.onchange('regl_recu_sign')
+    def _onchange_regl_recu_sign(self):
+        if (self.regl_recu_sign):
+            self.date_regl_recu_sign = fields.Datetime.now()
+        else:
+            self.date_regl_recu_sign = False
+
+    @api.onchange('faute_grave_recu_sign')
+    def _onchange_faute_grave_recu_sign(self):
+        if (self.faute_grave_recu_sign):
+            self.date_faute_grave_recu_sign = fields.Datetime.now()
+        else:
+            self.date_faute_grave_recu_sign = False
+
+    @api.onchange('charte_info_recu_sign')
+    def _onchange_charte_info_recu_sign(self):
+        if (self.charte_info_recu_sign):
+            self.date_charte_info_recu_sign = fields.Datetime.now()
+        else:
+            self.date_charte_info_recu_sign = False
+    ############################################
+    #### on_change method for SAHAM checkbox ####
+    ############################################
+    @api.onchange('bds_remis')
+    def _onchange_bds_remis(self):
+        if (self.bds_remis):
+            self.date_bds_remis = fields.Datetime.now()
+        else:
+            self.date_bds_remis = False
+
+    @api.onchange('bds_recu')
+    def _onchange_bds_recu(self):
+        if (self.bds_recu):
+            self.date_bds_recu = fields.Datetime.now()
+        else:
+            self.date_bds_recu = False
+
+    @api.onchange('bds_transmis_saham')
+    def _onchange_bds_transmis_saham(self):
+        if (self.bds_transmis_saham):
+            self.date_bds_transmis_saham = fields.Datetime.now()
+        else:
+            self.date_bds_transmis_saham = False
+    @api.onchange( 'photo_transmis_securt')
+    def _onchange_photo_transmis_securt(self):
+        if (self.photo_transmis_securt):
+            self.date_photo_transmis_securt = fields.Datetime.now()
+        else:
+            self.date_photo_transmis_securt = False
+    ############################################
+    #### on_change method for cnss checkbox ####
+    ############################################
+    @api.onchange('form_remis_pr_sign')
+    def _onchange_form_remis_pr_sign(self):
+        if (self.form_remis_pr_sign):
+            self.date_form_remis = fields.Datetime.now()
+        else:
+            self.date_form_remis = False
+
+    @api.onchange( 'form_transmis_cnss')
+    def _onchange_form_transmis_cnss(self):
+        if (self.form_transmis_cnss):
+            self.date_form_transmis = fields.Datetime.now()
+        else:
+            self.date_form_transmis = False
+
+    @api.onchange('carte_recu')
+    def _onchange_carte_recu(self):
+        if (self.carte_recu):
+            self.date_carte_recu = fields.Datetime.now()
+        else:
+            self.date_carte_recu = False
+
+    @api.onchange('carte_remise')
+    def _onchange_carte_remise(self):
+        if (self.carte_remise):
+            self.date_carte_remise = fields.Datetime.now()
+        else:
+            self.date_carte_remise = False
 
 class EmployeeDWGrde(models.Model):
     _name = "hr.employee.dw.grade"

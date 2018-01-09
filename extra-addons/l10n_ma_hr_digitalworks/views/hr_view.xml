@@ -86,18 +86,27 @@
                                 <field name="has_cin"/>
                                 <field name="has_carte_sejour"/>
                                 <field name="has_photos"/>
+                                <field name="has_passport"/>
                                 <field name="has_fiche_anthropometrique"/>
                                 <field name="has_radio_pulmonaire"/>
                                 <field name="has_justif_salaire"/>
+                                <field name="has_rib"/>
+                                <field name="has_stc"/>
+                                <field name="has_cnss"/>
                                 <field name="has_attestation_travail"/>
                                 <field name="has_diplome"/>
                             </group>
                             <group string="Dates Dépôts">
                                 <field name="date_depot_cin"/>
+                                <field name="date_depot_carte_sejour"/>
                                 <field name="date_depot_photos"/>
+                                <field name="date_depot_passport"/>
                                 <field name="date_depot_fiche_anthropometrique"/>
                                 <field name="date_depot_radio_pulmonaire"/>
                                 <field name="date_depot_justif_salaire"/>
+                                <field name="date_depot_rib"/>
+                                <field name="date_depot_stc"/>
+                                <field name="date_depot_cnss"/>
                                 <field name="date_depot_attestation_travail"/>
                                 <field name="date_depot_diplome"/>
                             </group>
@@ -137,7 +146,7 @@
                             <group string="Dates importantes">
                                 <field name="date_contract_remis_pr_sign"/>
                                 <field name="date_contract_recu_sign_leg"/>
-                                <!--<field name="date_contract_en_cours_sign"/>-->
+                                <field name="date_contract_en_cours_sign"/>
                                 <field name="date_contract_remis_sign"/>
                             </group>
 
@@ -175,7 +184,7 @@
                                 <field name="date_form_remis"/>
                                 <field name="date_form_transmis"/>
                                 <field name="date_carte_recu"/>
-                                <field name="date_catre_remise"/>
+                                <field name="date_carte_remise"/>
                             </group>
 
                             <group string="SAHAM">
