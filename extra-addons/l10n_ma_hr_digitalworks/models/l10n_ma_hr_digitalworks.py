@@ -467,6 +467,65 @@ class HrEmployee(models.Model):
             self.date_carte_remise = fields.Datetime.now()
         else:
             self.date_carte_remise = False
+    #######################################################
+    #### on_change method for conjoint&enfant checkbox ####
+    #######################################################
+    @api.onchange('has_conjoint_actmariage')
+    def _onchange_fhas_conjoint_actmariage(self):
+        if (self.has_conjoint_actmariage):
+            self.date_depot_conjoint_actmariage = fields.Datetime.now()
+        else:
+            self.date_depot_conjoint_actmariage = False
+
+    @api.onchange('has_conjoint_cin')
+    def _onchange_has_conjoint_cin(self):
+        if (self.has_conjoint_cin):
+            self.date_depot_conjoint_cin = fields.Datetime.now()
+        else:
+            self.date_depot_conjoint_cin = False
+
+    @api.onchange('has_conjoint_attestation_travail')
+    def _onchange_has_conjoint_attestation_travail(self):
+        if (self.has_conjoint_attestation_travail):
+            self.date_depot_conjoint_attestation_travail = fields.Datetime.now()
+        else:
+            self.date_depot_conjoint_attestation_travail = False
+
+    @api.onchange('has_cojoint_cnss')
+    def _onchange_has_cojoint_cnss(self):
+        if (self.has_cojoint_cnss):
+            self.date_depot_cojoint_cnss = fields.Datetime.now()
+        else:
+            self.date_depot_cojoint_cnss = False
+    #### on_change Enfant ####
+    @api.onchange('has_enfant_cert_scol')
+    def _onchange_has_enfant_cert_scol(self):
+        if (self.has_enfant_cert_scol):
+            self.date_depot_enfant_cert_scol = fields.Datetime.now()
+        else:
+            self.date_depot_enfant_cert_scol = False
+
+    @api.onchange('has_enfant_actnaissance')
+    def _onchange_has_enfant_actnaissance(self):
+        if (self.has_enfant_actnaissance):
+            self.date_depot_enfant_actnaissance = fields.Datetime.now()
+        else:
+            self.date_depot_enfant_actnaissance = False
+
+    @api.onchange('has_enfant_cert_vie')
+    def _onchange_has_enfant_cert_vie(self):
+        if (self.has_enfant_cert_vie):
+            self.date_depot_enfant_cert_vie = fields.Datetime.now()
+        else:
+            self.date_depot_enfant_cert_vie = False
+
+    @api.onchange('has_enfant_cert_alloc')
+    def _onchange_has_enfant_cert_alloc(self):
+        if (self.has_enfant_cert_alloc):
+            self.date_depot_enfant_cert_alloc = fields.Datetime.now()
+        else:
+            self.date_depot_enfant_cert_alloc = False
+
 
 class EmployeeDWGrde(models.Model):
     _name = "hr.employee.dw.grade"
