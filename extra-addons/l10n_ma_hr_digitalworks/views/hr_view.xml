@@ -252,6 +252,18 @@
             </field>
         </record>
 
+        <record model="ir.ui.view" id="hr_employee_kanban_extension">
+                <field name="name">hr.employee kanban extension</field>
+                <field name="inherit_id" ref="hr.hr_kanban_view_employees"/>
+                <field name="model">hr.employee</field>
+                <field name="arch" type="xml">
+                        <xpath expr="//field[@name='name']" position="after">
+                            <li><field name="matricule_dw"/></li>
+                        </xpath>
+                </field>
+        </record>
+
+
         <record id="view_hr_dw_grade_tree" model="ir.ui.view">
             <field name="name">hr.emp.dw.grade.tree</field>
             <field name="model">hr.employee.dw.grade</field>
