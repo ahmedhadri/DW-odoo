@@ -526,6 +526,11 @@ class HrEmployee(models.Model):
         else:
             self.date_depot_enfant_cert_alloc = False
 
+    @api.model
+    def create(self, vals):
+        vals['matricule_dw'] = self.env['ir.sequence'].next_by_code('hr.employee') or '/'
+        return super(HrEmployee, self).create(vals)
+
 
 class EmployeeDWGrde(models.Model):
     _name = "hr.employee.dw.grade"

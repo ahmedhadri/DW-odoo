@@ -13,7 +13,8 @@
     'images': ['images/digital_works_logo.png'],
     'data': [
              'views/hr_view.xml',
-             'views/l10n_ma_hr_digitalworks_view.xml'
+             'views/l10n_ma_hr_digitalworks_view.xml',
+             'data/hr_employee_sequence.xml',
              ],
     'installable': True,
     'application': True,

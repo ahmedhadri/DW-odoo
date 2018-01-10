@@ -18,7 +18,7 @@
                     <div class="oe_title">
                         <label for="matricule_dw" class="oe_edit_only"/>
                         <h1>
-                            <field name="matricule_dw" placeholder="Matricule DW"/>
+                            <field name="matricule_dw" readonly="True"/>
                         </h1>
                     </div>
                     <div class="oe_title">
