@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<odoo>
+    <data noupdate="1">
+        <!-- HR SALARY EXTRA RULES FOR DIGITAL WORKS -->
+        <record id="hr_payroll.hr_rule_indmnt_form" model="hr.salary.rule">
+            <field name="name">Indimnité Formation</field>
+            <field name="sequence">5</field>
+            <field name="code">INDFOR</field>
+            <field name="category_id" ref="hr_payroll.ALW"/>
+            <field name="amount_select">percentage</field>
+		    <field name="amount_percentage_base">contract.wage/191</field>
+		    <field name="quantity">payslip.indimnite_formation</field>
+            <field name="amount_percentage">100</field>
+            <field name="note">Indimnité de formation </field>
+        </record>
+
+        <record id="hr_payroll.hr_rule_hprod" model="hr.salary.rule">
+            <field name="name">Salaire Heures de Production</field>
+            <field name="sequence">5</field>
+            <field name="code">HPROD</field>
+            <field name="category_id" ref="hr_payroll.BASIC"/>
+            <field name="amount_select">percentage</field>
+		    <field name="amount_percentage_base">contract.wage/191</field>
+		    <field name="quantity">payslip.indimnite_pro_tx_normal</field>
+            <field name="amount_percentage">100</field>
+            <field name="note">Salaire Heures de Production</field>
+        </record>
+
+        <record id="hr_payroll.hr_rule_cong_py" model="hr.salary.rule">
+            <field name="name">Congé Payé</field>
+            <field name="sequence">5</field>
+            <field name="code">INDCONG</field>
+            <field name="category_id" ref="hr_payroll.ALW"/>
+            <field name="amount_select">percentage</field>
+		    <field name="amount_percentage_base">contract.wage/191</field>
+		    <field name="quantity">payslip.indimnite_conge</field>
+            <field name="amount_percentage">100</field>
+            <field name="note">Congé Payé</field>
+        </record>
+
+        <record id="hr_payroll.hr_rule_pack_hs" model="hr.salary.rule">
+            <field name="name">Pack HS</field>
+            <field name="sequence">5</field>
+            <field name="code">PACKHS</field>
+            <field name="category_id" ref="hr_payroll.ALW"/>
+            <field name="amount_select">percentage</field>
+		    <field name="amount_percentage_base">contract.wage/191</field>
+		    <field name="quantity">payslip.base_calcul_pack*payslip.pack_taux</field>
+            <field name="amount_percentage">100</field>
+            <field name="note">Pack HS</field>
+        </record>
+
+        <record id="hr_payroll.hr_rule_chlg" model="hr.salary.rule">
+            <field name="name">Challenge</field>
+            <field name="sequence">5</field>
+            <field name="code">CHALLENG</field>
+            <field name="category_id" ref="hr_payroll.ALW"/>
+            <field name="amount_select">code</field>
+		    <field name="amount_python_compute">result = payslip.challenge</field>
+            <field name="note">Challenge</field>
+        </record>
+
+        <record id="hr_payroll.hr_rule_bonus" model="hr.salary.rule">
+            <field name="name">Bonus</field>
+            <field name="sequence">5</field>
+            <field name="code">BONUS</field>
+            <field name="category_id" ref="hr_payroll.ALW"/>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = payslip.bonus</field>
+            <field name="note">Bonus</field>
+        </record>
+
+        <record id="hr_payroll.hr_rule_ret_sal" model="hr.salary.rule">
+            <field name="name">Retenu Sur Salaire</field>
+            <field name="sequence">5</field>
+            <field name="code">RETSAL</field>
+            <field name="category_id" ref="l10n_ma_hr_payroll_10Basic.AVSAL"/>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = payslip.retenu_sur_salaire</field>
+            <field name="note">Retenu Sur Salaire</field>
+        </record>
+
+        <record id="hr_payroll.hr_rule_regul" model="hr.salary.rule">
+            <field name="name">Réguls</field>
+            <field name="sequence">5</field>
+            <field name="code">REGUL</field>
+            <field name="category_id" ref="l10n_ma_hr_payroll_10Basic.REMMUT"/>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result=payslip.reguls</field>
+            <field name="note">Réguls</field>
+        </record>
+
+        <record id="hr_payroll.hr_rule_toto" model="hr.salary.rule">
+            <field name="name">Hourly Pay (Timesheet)</field>
+            <field name="sequence">1</field>
+            <field name="code">HT</field>
+            <field name="category_id" ref="hr_payroll.BASIC"/>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = (contract.wage/payslip.total_hours)*payslip.timesheet_hours if payslip.total_hours else 0.0</field>
+            <field name="note">Hourly Pay (Timesheet)</field>
+        </record>
+
+    </data>
+</odoo>
