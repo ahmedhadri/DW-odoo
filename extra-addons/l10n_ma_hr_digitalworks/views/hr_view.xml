@@ -124,9 +124,15 @@
                             </group>
                             <group string="Enfants" attrs="{'invisible':[('children', '=', 0)]}">
                                 <field name="has_enfant_actnaissance"/>
+                                <field name="has_enfant_cert_vie"/>
+                                <field name="has_enfant_cert_scol"/>
+                                <field name="has_enfant_cert_alloc"/>
                             </group>
                             <group string="Dates Dépôts" attrs="{'invisible':[('children', '=', 0)]}">
                                 <field name="date_depot_enfant_actnaissance"/>
+                                <field name="date_depot_enfant_cert_vie"/>
+                                <field name="date_depot_enfant_cert_scol"/>
+                                <field name="date_depot_enfant_cert_alloc"/>
                             </group>
 
                         </group>

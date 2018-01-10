@@ -180,7 +180,14 @@ class HrEmployee(models.Model):
 
     #####  => Enfants ####
     has_enfant_actnaissance = fields.Boolean(u'Check Acte Naissance', default=False)
+    has_enfant_cert_vie = fields.Boolean(u'Check Certif Vie Collectif', default=False)
+    has_enfant_cert_scol = fields.Boolean(u'Check Certif Scolarité', default=False)
+    has_enfant_cert_alloc = fields.Boolean(u'Check Certif Allocation Familiale / Mutuelle', default=False)
+
     date_depot_enfant_actnaissance = fields.Datetime(u'Date Dépôt Acte Naissance')
+    date_depot_enfant_cert_vie = fields.Datetime(u'Date Certif Vie Collectif')
+    date_depot_enfant_cert_scol = fields.Datetime(u'Date Dépôt Certif Scolarité')
+    date_depot_enfant_cert_alloc = fields.Datetime(u'Date Dépôt Certif Allocation')
 
     ##### Suivi administratif Collaborateur ####
     ##### Contrat de travail #####
