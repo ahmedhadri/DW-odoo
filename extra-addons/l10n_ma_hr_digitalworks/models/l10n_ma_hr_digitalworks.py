@@ -9,6 +9,8 @@ from odoo.exceptions import UserError
 from datetime import date
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
+from odoo.addons import decimal_precision as dp
+
 
 
 class hr_contract(models.Model):
@@ -19,6 +21,10 @@ class hr_contract(models.Model):
     indimnite_transport = fields.Float(u'Indimnité Transport')
     grade_id = fields.Many2one('hr.employee.dw.grade', string="Employé Grade")
     category_id = fields.Many2one('hr.employee.dw.category', string="Employé Categorie")
+    # contract_wage_191 = fields.Float(compute='_compute_wage_191', store=True)
+    contract_wage_191 = fields.Float('compuuute wage 191', digits=dp.get_precision('Wage precision'))
+
+
 
     @api.onchange('grade_id')
     def _onchange_grade_id(self):
@@ -28,6 +34,8 @@ class hr_contract(models.Model):
         self.salaire_base = self.grade_id.salaire_base
         self.indimnite_panier = self.grade_id.indimnite_panier
         self.indimnite_transport = self.grade_id.indimnite_transport
+        self.contract_wage_191 = self.wage / 191
+        # self.write({'contract_wage_191': self.wage / 191})
 
     @api.onchange('category_id','type_id','trial_date_start')
     def _onchange_category_id(self):

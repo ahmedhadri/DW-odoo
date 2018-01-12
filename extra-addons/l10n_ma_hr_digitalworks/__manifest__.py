@@ -16,6 +16,7 @@
              'views/l10n_ma_hr_digitalworks_view.xml',
              'data/hr_employee_sequence.xml',
              'data/hr_payroll_extra_rules.xml',
+             'data/wage_precision.xml',
              ],
     'installable': True,
     'application': True,
