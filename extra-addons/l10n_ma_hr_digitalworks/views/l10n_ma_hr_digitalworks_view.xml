@@ -22,7 +22,6 @@
                     <field name="salaire_base"/>
                     <field name="indimnite_panier"/>
                     <field name="indimnite_transport"/>
-                    <field name="contract_wage_191"/>
                 </xpath>
              </data>
 
