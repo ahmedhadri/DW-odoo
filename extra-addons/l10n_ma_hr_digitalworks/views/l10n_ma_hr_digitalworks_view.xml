@@ -64,9 +64,6 @@
                          <field name="reguls"/>
                     </group>
                 </xpath>
-                <xpath expr="//header" position="attributes">
-                    <attribute name="groups">hr_payroll.group_hr_payroll_manager</attribute>
-                </xpath>
             </data>
             </field>
         </record>
