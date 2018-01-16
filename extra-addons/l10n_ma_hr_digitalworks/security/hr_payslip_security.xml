@@ -3,7 +3,7 @@
     <data noupdate="1">
         <!-- Add group -->
         <record id="group_hr_payroll_user" model="res.groups">
-            <field name="name">Utilisateuur</field>
+            <field name="name">Utilisateur</field>
             <field name="category_id" ref="base.module_category_hr_payroll"/>
             <field name="implied_ids" eval="[(4, ref('hr.group_hr_user'))]"/>
         </record>
