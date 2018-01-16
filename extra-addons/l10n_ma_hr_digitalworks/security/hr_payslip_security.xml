@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="group_hr_payroll_user" model="res.groups">
+            <field name="name">Utilisateuur</field>
+            <field name="category_id" ref="base.module_category_hr_payroll"/>
+            <field name="implied_ids" eval="[(4, ref('hr.group_hr_user'))]"/>
+        </record>
+
+        <record model="ir.rule" id="rule_hr_payslip_user">
+            <field name="name">Utilisateur</field>
+            <field name="model_id" ref="model_hr_payslip" />
+            <field name="groups" eval="[(4, ref('l10n_ma_hr_digitalworks.group_hr_payroll_user'))]"/>
+            <field name="domain_force">[('employee_id.matricule_dw','=',user.login)]</field>
+            <field eval="0" name="perm_unlink"/>
+            <field eval="0" name="perm_write"/>
+            <field eval="1" name="perm_read"/>
+            <field eval="0" name="perm_create"/>
+        </record>
+
+        <!-- Partner and address -->
+        <record id="hr_payslip_rule" model="ir.model.access">
+                <field name="name">hr_payslip_rule</field>
+                <field name="model_id" ref="model_hr_payslip"/>
+                <field name="group_id" ref="l10n_ma_hr_digitalworks.group_hr_payroll_user"/>
+                <field name="perm_read" eval="1"/>
+                <field name="perm_create" eval="0"/>
+                <field name="perm_write" eval="0"/>
+                <field name="perm_unlink" eval="0"/>
+            </record>
+        <record id="hr_input_rule" model="ir.model.access">
+                <field name="name">hr_input_rule</field>
+                <field name="model_id" ref="hr_payroll.model_hr_payslip_input"/>
+                <field name="group_id" ref="l10n_ma_hr_digitalworks.group_hr_payroll_user"/>
+                <field name="perm_read" eval="1"/>
+                <field name="perm_create" eval="0"/>
+                <field name="perm_write" eval="0"/>
+                <field name="perm_unlink" eval="0"/>
+            </record>
+        <record id="hr_worked_day_rule" model="ir.model.access">
+                <field name="name">hr_worked_day_rule</field>
+                <field name="model_id" ref="hr_payroll.model_hr_payslip_worked_days"/>
+                <field name="group_id" ref="l10n_ma_hr_digitalworks.group_hr_payroll_user"/>
+                <field name="perm_read" eval="1"/>
+                <field name="perm_create" eval="0"/>
+                <field name="perm_write" eval="0"/>
+                <field name="perm_unlink" eval="0"/>
+            </record>
+        <record id="hr_payslip_line_rule" model="ir.model.access">
+                <field name="name">hr_payslip_line_rule</field>
+                <field name="model_id" ref="hr_payroll.model_hr_payslip_line"/>
+                <field name="group_id" ref="l10n_ma_hr_digitalworks.group_hr_payroll_user"/>
+                <field name="perm_read" eval="1"/>
+                <field name="perm_create" eval="0"/>
+                <field name="perm_write" eval="0"/>
+                <field name="perm_unlink" eval="0"/>
+            </record>
+
+        <record model="ir.ui.menu" id="hr_payroll.menu_department_tree">
+            <field eval="[(4,[ref('l10n_ma_hr_digitalworks.group_hr_payroll_user')])]" name="groups_id"/>
+        </record>
+    </data>
+</odoo>
