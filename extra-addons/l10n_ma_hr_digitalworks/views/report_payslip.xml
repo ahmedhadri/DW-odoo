@@ -35,6 +35,10 @@
                         <attribute name="t-if">line.total != 0</attribute>
                 </xpath>
 
+                <!--xpath expr="//table[@class='table table-condensed']/tbody/tr" position="attributes">
+                        <attribute name="t-if">line.total != 500</attribute>
+                </xpath-->
+
             </template>
 
     </data>
