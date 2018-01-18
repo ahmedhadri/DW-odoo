@@ -145,18 +145,18 @@ class HrEmployee(models.Model):
     ##### Documents Apportés ####
     #####  => Employé ####
 
-    has_cin = fields.Boolean(u'Check CIN', default=False)
-    has_carte_sejour = fields.Boolean(u'Check Carte Séjour', default=False)
-    has_photos = fields.Boolean(u'Check Photos', default=False)
-    has_passport = fields.Boolean(u'Check Passport', default=False)
-    has_fiche_anthropometrique = fields.Boolean(u'Check Fiche Anthropométrique', default=False)
-    has_radio_pulmonaire = fields.Boolean(u'Check Radio Pulmonaire', default=False)
-    has_justif_salaire = fields.Boolean(u'Check Justif Salaire', default=False)
-    has_rib = fields.Boolean(u'Check RIB', default=False)
-    has_stc = fields.Boolean(u'Check STC', default=False)
-    has_cnss = fields.Boolean(u'Check CNSS', default=False)
-    has_attestation_travail = fields.Boolean(u'Check Attestation Travail', default=False)
-    has_diplome = fields.Boolean(u'Check Diplome(s)', default=False)
+    has_cin = fields.Boolean(u'CIN', default=False)
+    has_carte_sejour = fields.Boolean(u'Carte Séjour', default=False)
+    has_photos = fields.Boolean(u'Photos', default=False)
+    has_passport = fields.Boolean(u'Passport', default=False)
+    has_fiche_anthropometrique = fields.Boolean(u'Fiche Anthropométrique', default=False)
+    has_radio_pulmonaire = fields.Boolean(u'Radio Pulmonaire', default=False)
+    has_justif_salaire = fields.Boolean(u'Justif Salaire', default=False)
+    has_rib = fields.Boolean(u'RIB', default=False)
+    has_stc = fields.Boolean(u'STC', default=False)
+    has_cnss = fields.Boolean(u'CNSS', default=False)
+    has_attestation_travail = fields.Boolean(u'Attestation Travail', default=False)
+    has_diplome = fields.Boolean(u'Diplome(s)', default=False)
 
     date_depot_cin = fields.Datetime(u'Date Dépôt CIN')
     date_depot_carte_sejour = fields.Datetime(u'Date Dépôt Carte séjour')
@@ -172,10 +172,10 @@ class HrEmployee(models.Model):
     date_depot_cnss = fields.Datetime(u'Date Dépôt CNSS')
 
     #####  => Conjoint ####
-    has_conjoint_actmariage = fields.Boolean(u'Check Acte Marriage', default=False)
-    has_conjoint_cin = fields.Boolean(u'Check CIN', default=False)
-    has_conjoint_attestation_travail = fields.Boolean(u'Check Attestation Travail', default=False)
-    has_cojoint_cnss = fields.Boolean(u'Check CNSS', default=False)
+    has_conjoint_actmariage = fields.Boolean(u'Acte Marriage', default=False)
+    has_conjoint_cin = fields.Boolean(u'CIN', default=False)
+    has_conjoint_attestation_travail = fields.Boolean(u'Attestation Travail', default=False)
+    has_cojoint_cnss = fields.Boolean(u'CNSS', default=False)
 
     date_depot_conjoint_actmariage = fields.Datetime(u'Date Dépôt Acte Marriage')
     date_depot_conjoint_cin = fields.Datetime(u'Date Dépôt CIN')
@@ -183,10 +183,10 @@ class HrEmployee(models.Model):
     date_depot_cojoint_cnss = fields.Datetime(u'Date Dépôt CNSS')
 
     #####  => Enfants ####
-    has_enfant_actnaissance = fields.Boolean(u'Check Acte Naissance', default=False)
-    has_enfant_cert_vie = fields.Boolean(u'Check Certif Vie Collectif', default=False)
-    has_enfant_cert_scol = fields.Boolean(u'Check Certif Scolarité', default=False)
-    has_enfant_cert_alloc = fields.Boolean(u'Check Certif Allocation Familiale / Mutuelle', default=False)
+    has_enfant_actnaissance = fields.Boolean(u'Acte Naissance', default=False)
+    has_enfant_cert_vie = fields.Boolean(u'Certif Vie Collectif', default=False)
+    has_enfant_cert_scol = fields.Boolean(u'Certif Scolarité', default=False)
+    has_enfant_cert_alloc = fields.Boolean(u'Certif Allocation Familiale / Mutuelle', default=False)
 
     date_depot_enfant_actnaissance = fields.Datetime(u'Date Dépôt Acte Naissance')
     date_depot_enfant_cert_vie = fields.Datetime(u'Date Certif Vie Collectif')
