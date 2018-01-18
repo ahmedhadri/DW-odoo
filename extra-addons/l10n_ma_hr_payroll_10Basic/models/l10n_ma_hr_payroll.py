@@ -6,14 +6,54 @@ from odoo import fields, models,api
 from odoo.addons import decimal_precision as dp
 from odoo.tools.translate import _
 from odoo.exceptions import UserError
+from datetime import datetime
+from dateutil.relativedelta import relativedelta
+
 	
 class hr_contract(models.Model):
     _inherit = 'hr.contract'
 
-	
-    
-		
-		
+    ##### Autre Avantage #####
+    has_phone = fields.Boolean(u'Téléphone', default=False)
+    detail_phone = fields.Char(u'Détails')
+    date_phone = fields.Date(u'Date de remise téléphone')
+
+    has_pc = fields.Boolean(u'PC Portable', default=False)
+    detail_pc = fields.Char(u'Détails', default=False)
+    date_pc = fields.Date(u'Date de remise PC Portable', default=False)
+
+    ##### Départ #####
+    trial_date_end_1 = fields.Date('First Trial End Date')
+    trial_date_end_2 = fields.Date('Second Trial End Date')
+
+    cycle = fields.Selection([('production', 'Production'), ('formation', 'Formation')], string=u'Cycle')
+    timming = fields.Selection([('s1', 'S1'), ('s2', 'S2'),('s3', 'S3'), ('s4', 'S4'),('s5', 'S5'), ('s6', 'S6'), ('s7', 'S7')], string=u'Timming')
+    nature_depart = fields.Selection([('subi', 'Subi'), ('voulu', 'Voulu')], string=u'Nature de départ')
+    mode_depart = fields.Selection([('abandon', 'Abandon de poste'), ('demission', 'Démission'), ('fin_period', 'Fin de période d\'essai')], string=u'Mode de départ')
+    raison_depart = fields.Selection([('sante', 'Santé'),
+                                      ('retour_pays', 'Retour au pays'),
+                                      ('injoignable', 'Injoignable'),
+                                      ('opportunite', 'nouvelle opportunité'),
+                                      ('linguistique', 'Niveau linguistique'),
+                                      ('personnel', 'Problèmes personnelles'),
+                                      ('ind_prod', 'Indicateurs de production')], string=u'Raison de départ')
+    notes_manager = fields.Text('Notes Manager')
+    notes_rh = fields.Text('Notes RH')
+
+    @api.onchange('category_id','type_id','date_start')
+    def _onchange_category_id(self):
+        """ This function computes trial end period 1 and 2
+        """
+        if self.date_start:
+            if self.type_id.name == "CDI" :
+                if self.category_id.name==u'Employé':
+                    self.trial_date_end_1 = (datetime.strptime(self.date_start,'%Y-%m-%d') + relativedelta(days=45)).strftime('%Y-%m-%d')
+                    self.trial_date_end_2 = (datetime.strptime(self.date_start,'%Y-%m-%d') + relativedelta(months=3)).strftime('%Y-%m-%d')
+                if  self.category_id.name=="Cadre":
+                    self.trial_date_end_1 = (datetime.strptime(self.date_start,'%Y-%m-%d') + relativedelta(months=3)).strftime('%Y-%m-%d')
+                    self.trial_date_end_2 = (datetime.strptime(self.date_start,'%Y-%m-%d') + relativedelta(months=6)).strftime('%Y-%m-%d')
+
+
 class res_company(models.Model):
     _inherit = 'res.company'
     _name = 'res.company'

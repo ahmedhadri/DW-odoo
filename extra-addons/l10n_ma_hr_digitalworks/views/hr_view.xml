@@ -61,6 +61,7 @@
                             <field name="date_expiration_cin"/>
                             <field name="num_carte_sejour"/>
                             <field name="date_expiration_carte_sejour"/>
+                            <field name="type_carte_sejour"/>
                 </xpath>
 
                 <xpath expr="//notebook/page[2]/group/group[2]" position="after">
@@ -184,12 +185,14 @@
                                 <field name="form_remis_pr_sign"/>
                                 <field name="form_transmis_cnss"/>
                                 <field name="carte_recu"/>
+                                <field name="matr_cnss_recu"/>
                                 <field name="carte_remise"/>
                             </group>
                             <group string="Dates importantes">
                                 <field name="date_form_remis"/>
                                 <field name="date_form_transmis"/>
                                 <field name="date_carte_recu"/>
+                                <field name="date_matr_cnss_recu"/>
                                 <field name="date_carte_remise"/>
                             </group>
 
@@ -197,13 +200,13 @@
                                 <field name="bds_remis"/>
                                 <field name="bds_recu"/>
                                 <field name="bds_transmis_saham"/>
-                                <field name="photo_transmis_securt"/>
+                                <!--<field name="photo_transmis_securt"/>-->
                             </group>
                             <group string="Dates importantes">
                                 <field name="date_bds_remis"/>
                                 <field name="date_bds_recu"/>
                                 <field name="date_bds_transmis_saham"/>
-                                <field name="date_photo_transmis_securt"/>
+                                <!--<field name="date_photo_transmis_securt"/>-->
                             </group>
 
                         </group>

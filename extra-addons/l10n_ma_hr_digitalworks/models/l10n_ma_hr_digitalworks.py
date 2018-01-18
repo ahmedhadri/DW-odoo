@@ -9,7 +9,6 @@ from odoo.exceptions import UserError
 from datetime import date
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
-from odoo.addons import decimal_precision as dp
 
 
 
@@ -32,16 +31,6 @@ class hr_contract(models.Model):
         self.salaire_base = self.grade_id.salaire_base
         self.indimnite_panier = self.grade_id.indimnite_panier
         self.indimnite_transport = self.grade_id.indimnite_transport
-
-    @api.onchange('category_id','type_id','trial_date_start')
-    def _onchange_category_id(self):
-        """ This function sets partner email address based on partner
-        """
-        if self.trial_date_start:
-            if (self.type_id.name == "CDI" and self.category_id.name=="Employee"):
-                self.trial_date_end = (datetime.strptime(self.trial_date_start,'%Y-%m-%d') + relativedelta(months=6)).strftime('%Y-%m-%d')
-            elif (self.type_id.name == "CDI" and self.category_id.name=="Cadre"):
-                self.trial_date_end = (datetime.strptime(self.trial_date_start,'%Y-%m-%d') + relativedelta(months=3)).strftime('%Y-%m-%d')
 
 class hr_payslip(models.Model):
     _inherit = 'hr.payslip'
@@ -137,6 +126,9 @@ class HrEmployee(models.Model):
     adresse_personnelle = fields.Char(string="Adresse Personnelle", required=False)
     ville_personnelle = fields.Char(string="Ville", required=False)
     num_carte_sejour = fields.Char(u'N° Carte Séjour')
+    type_carte_sejour = fields.Selection([
+        ('carte_dip', 'Carte diplomatique'),
+        ('etudiant', 'Étudiant'),('refugie', 'Réfugié'),('travail', 'Travail')], string=u'Type Carte Séjour')
     date_expiration_cin = fields.Date('Date Expiration CIN')
     date_expiration_passport = fields.Date('Date Expiration Passport')
     date_expiration_carte_sejour = fields.Date('Date Expiration Carte Sejour')
@@ -227,11 +219,13 @@ class HrEmployee(models.Model):
     form_remis_pr_sign = fields.Boolean('Formulaire remis pour signature', default=False)
     form_transmis_cnss = fields.Boolean(u'Formulaire transmis à la CNSS', default=False)
     carte_recu = fields.Boolean(u'Carte reçue', default=False)
+    matr_cnss_recu = fields.Boolean(u'Matricule CNSS reçue', default=False)
     carte_remise = fields.Boolean('Carte remise au collaborateur', default=False)
 
     date_form_remis = fields.Datetime('Date de remise')
     date_form_transmis = fields.Datetime(u'Date de transmission à la CNSS')
     date_carte_recu = fields.Datetime('Date de reception de la carte')
+    date_matr_cnss_recu = fields.Datetime('Date de reception de la matricule')
     date_carte_remise= fields.Datetime('Date de remise de la carte')
 
     ##### SAHAM #####
@@ -239,12 +233,12 @@ class HrEmployee(models.Model):
     bds_remis = fields.Boolean('BDS remis au collaborateur', default=False)
     bds_recu = fields.Boolean(u'BDS reçu par le collborateur', default=False)
     bds_transmis_saham = fields.Boolean(u'BDS Transmis à SAHAM', default=False)
-    photo_transmis_securt = fields.Boolean(u'Photo transmise à la sécurité', default=False)
+    # photo_transmis_securt = fields.Boolean(u'Photo transmise à la sécurité', default=False)
 
     date_bds_remis = fields.Datetime('Date de remise de BDS')
     date_bds_recu = fields.Datetime('Date de reception de BDS')
     date_bds_transmis_saham = fields.Datetime(u'Date de transmission de BDS à SAHAM')
-    date_photo_transmis_securt = fields.Datetime(u'Date de transmission de la photo à la sécurité')
+    # date_photo_transmis_securt = fields.Datetime(u'Date de transmission de la photo à la sécurité')
 
     _sql_constraints = [
         ('matricule_dw', 'unique(matricule_dw)',
@@ -464,6 +458,15 @@ class HrEmployee(models.Model):
             self.date_carte_recu = fields.Datetime.now()
         else:
             self.date_carte_recu = False
+
+    @api.onchange('matr_cnss_recu', 'matricule_cnss')
+    def _onchange_matr_cnss(self):
+        if (self.matricule_cnss):
+            self.matr_cnss_recu = True
+            self.date_matr_cnss_recu = fields.Datetime.now()
+        else:
+            self.matr_cnss_recu = False
+            self.date_matr_cnss_recu = False
 
     @api.onchange('carte_remise')
     def _onchange_carte_remise(self):

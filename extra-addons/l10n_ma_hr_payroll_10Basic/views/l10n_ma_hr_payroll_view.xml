@@ -12,21 +12,82 @@
 
 			<data>
                  <xpath expr="//notebook" position="inside">
-                   
-            <page string="Primes et autres Avantages" name="information">
-                           
-                    <group name="primes" string="Primes">
-                    
-					</group>
-				
-			<group col="2" colspan="2" name="left_column">
-                    <separator colspan="2" string="Type de Paie"/>
-			        <field name="schedule_pay"/>
-				    </group>
-					
-             </page>
+                    <page string="Primes et autres Avantages" name="other_advantages">
+
+                        <group name="primes" string="Primes">
+
+                        </group>
+
+                        <group col="2" colspan="2" name="left_column">
+                            <separator colspan="2" string="Type de Paie"/>
+                            <field name="schedule_pay"/>
+                        </group>
+                        <group col="2" colspan="2" name="left_column">
+                                <separator colspan="2" string="Autres"/>
+                            <group>
+                                    <field name="has_phone"/>
+                                    <field name="detail_phone" attrs="{'invisible':[('has_phone', '=', False)]}"/>
+                                    <field name="date_phone" attrs="{'invisible':[('has_phone', '=', False)]}"/>
+                            </group>
+                            <group>
+                                    <field name="has_pc"/>
+                                    <field name="detail_pc" attrs="{'invisible':[('has_pc', '=', False)]}"/>
+                                    <field name="date_pc" attrs="{'invisible':[('has_pc', '=', False)]}"/>
+                             </group>
+                        </group>
+                     </page>
+
+                     <page string="Départ" name="leaving" attrs="{'invisible':[('date_start', '=', False)]}">
+                         <group col="4">
+                                    <field name="date_end" string="Date de départ"/>
+                                    <field name="cycle"/>
+                                    <field name="timming"/>
+                                    <field name="nature_depart"/>
+                                    <field name="mode_depart"/>
+                                    <field name="raison_depart"/>
+                            </group>
+                         <separator string="Notes Manager"/>
+                                    <field name="notes_manager" nolabel="1" placeholder="Votre commentaire ..."/>
+                         <separator string="Notes RH"/>
+                                    <field name="notes_rh" nolabel="1" placeholder="Votre commentaire ..."/>
+                     </page>
+
              </xpath>
              </data>
+            </field>
+        </record>
+
+        <record id="hr_contract_view_form_extend_1" model="ir.ui.view">
+              <field name="name">Contract Duration</field>
+              <field name="model">hr.contract</field>
+              <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
+              <field name="arch" type="xml">
+                    <xpath expr="//notebook/page/group/group[2]/label[1]" position="attributes">
+                        <attribute name="invisible">True</attribute>
+                    </xpath>
+                  <xpath expr="//notebook/page/group/group[2]/div[1]" position="attributes">
+                        <attribute name="invisible">True</attribute>
+                    </xpath>
+                  <xpath expr="//notebook/page/group/group[2]/label[2]" position="attributes">
+                        <attribute name="invisible">True</attribute>
+                    </xpath>
+                  <xpath expr="//notebook/page/group/group[2]/div[2]" position="attributes">
+                        <attribute name="invisible">True</attribute>
+                    </xpath>
+
+                  <xpath expr="//notebook/page/group/group[2]/field[@name='working_hours']" position="before">
+                        <group col="2" colspan="2">
+                            <field name="date_start" string="Date d'intégration" class="oe_inline"/>
+                            <label for="trial_date_start" string="Date de fin PE1"/>
+                                    <div>
+                                        <field name="trial_date_end_1" class="oe_inline" />
+                                    </div>
+                            <label for="trial_date_start" string="Date de fin PE2"/>
+                                    <div>
+                                        <field name="trial_date_end_2" class="oe_inline"/>
+                                    </div>
+                        </group>
+                    </xpath>
             </field>
         </record>
 		

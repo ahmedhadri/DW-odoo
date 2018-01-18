@@ -16,7 +16,7 @@
                     <field name="grade_id" string="Grade"/>
                 </xpath>
                 <xpath expr="//field[@name='type_id']" position="after">
-                    <field name="category_id" string="Catégorie Employé"/>
+                    <field name="category_id" string="Catégorie Employé" options="{'no_create': True, 'no_create_edit':True}"/>
                 </xpath>
                 <xpath expr="//field[@name='wage']" position="after">
                     <field name="salaire_base"/>
