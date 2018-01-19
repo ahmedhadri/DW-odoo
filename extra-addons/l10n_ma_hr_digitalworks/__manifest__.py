@@ -15,6 +15,7 @@
              'security/hr_payslip_security.xml',
              'views/report_payslip.xml',
              'views/hr_view.xml',
+             'views/hr_holidays_view.xml',
              'views/l10n_ma_hr_digitalworks_view.xml',
              'data/hr_employee_sequence.xml',
              'data/hr_payroll_extra_rules.xml',

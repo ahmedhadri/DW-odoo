@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <data>
+
+     <record id="edit_holiday_new_l10n_ma_payroll" model="ir.ui.view">
+            <field name="name">Leave Request Inherited</field>
+            <field name="model">hr.holidays</field>
+            <field name="priority">20</field>
+            <field name="inherit_id" ref="hr_holidays.edit_holiday_new"/>
+			<field name="arch" type="xml">
+
+                    <xpath expr="//sheet/group/group/div/div[2]/field[@name='number_of_days_temp']" position="replace">
+                        <div>
+                            <field name="number_of_days_temp_2" class="oe_inline"/> jours
+                        </div>
+                    </xpath>
+
+                   </field>
+        </record>
+
+
+    </data>
+</odoo>
