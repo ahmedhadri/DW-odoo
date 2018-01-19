@@ -21,12 +21,12 @@
             <field name="sequence">5</field>
             <field name="code">HPROD</field>
             <field name="category_id" ref="hr_payroll.BASIC"/>
-            <field name="amount_select">code</field>
-		    <field name="amount_python_compute">result = (contract.wage/191)*payslip.indimnite_pro_tx_normal</field>
-            <!--field name="amount_select">percentage</field>
+            <!--field name="amount_select">code</field>
+		    <field name="amount_python_compute">result = (contract.wage/191)*payslip.indimnite_pro_tx_normal</field-->
+            <field name="amount_select">percentage</field>
 		    <field name="amount_percentage_base">contract.wage/191</field>
 		    <field name="quantity">payslip.indimnite_pro_tx_normal</field>
-            <field name="amount_percentage">100</field-->
+            <field name="amount_percentage">100</field>
             <field name="note">Salaire Heures de Production</field>
         </record>
 
@@ -47,12 +47,12 @@
             <field name="sequence">5</field>
             <field name="code">PACKHS</field>
             <field name="category_id" ref="hr_payroll.ALW"/>
-            <field name="amount_select">code</field>
-		    <field name="amount_python_compute">result = (contract.wage/191)*payslip.base_calcul_pack*payslip.pack_taux</field>
-            <!--field name="amount_select">percentage</field>
+            <!--field name="amount_select">code</field>
+		    <field name="amount_python_compute">result = (contract.wage/191)*payslip.base_calcul_pack*payslip.pack_taux</field-->
+            <field name="amount_select">percentage</field>
 		    <field name="amount_percentage_base">contract.wage/191</field>
 		    <field name="quantity">payslip.base_calcul_pack*payslip.pack_taux</field>
-            <field name="amount_percentage">100</field-->
+            <field name="amount_percentage">100</field>
             <field name="note">Pack HS</field>
         </record>
 

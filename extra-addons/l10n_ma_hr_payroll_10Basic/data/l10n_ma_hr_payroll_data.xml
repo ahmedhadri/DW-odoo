@@ -2,7 +2,7 @@
 
 
 <odoo>
-    <data>
+    <data noupdate="1">
 	
  
  <!-- Holidays Category -->
