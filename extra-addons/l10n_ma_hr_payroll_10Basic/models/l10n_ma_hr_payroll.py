@@ -29,7 +29,7 @@ class hr_contract(models.Model):
     cycle = fields.Selection([('production', 'Production'), ('formation', 'Formation')], string=u'Cycle')
     timming = fields.Selection([('s1', 'S1'), ('s2', 'S2'),('s3', 'S3'), ('s4', 'S4'),('s5', 'S5'), ('s6', 'S6'), ('s7', 'S7')], string=u'Timming')
     nature_depart = fields.Selection([('subi', 'Subi'), ('voulu', 'Voulu')], string=u'Nature de départ')
-    mode_depart = fields.Selection([('abandon', 'Abandon de poste'), ('demission', 'Démission'), ('fin_period', 'Fin de période d\'essai')], string=u'Mode de départ')
+    mode_depart = fields.Selection([('abandon', 'Abandon de poste'), ('demission', 'Démission'), ('fin_period', 'Fin de période d\'essai'), ('licenciement', 'Licenciement')], string=u'Mode de départ')
     raison_depart = fields.Selection([('sante', 'Santé'),
                                       ('retour_pays', 'Retour au pays'),
                                       ('injoignable', 'Injoignable'),

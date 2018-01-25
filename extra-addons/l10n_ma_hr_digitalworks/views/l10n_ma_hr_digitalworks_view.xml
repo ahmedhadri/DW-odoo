@@ -13,7 +13,10 @@
 
 			<data>
                 <xpath expr="//field[@name='job_id']" position="after">
-                    <field name="grade_id" string="Grade"/>
+                    <field name="grade_id" string="Grade" attrs="{'required': True}"/>
+                </xpath>
+                <xpath expr="//field[@name='job_id']" position="attributes">
+                    <attribute name="required">True</attribute>
                 </xpath>
                 <xpath expr="//field[@name='type_id']" position="after">
                     <field name="category_id" string="Catégorie Employé" options="{'no_create': True, 'no_create_edit':True}"/>
@@ -132,6 +135,19 @@
                 </tree>
             </field>
         </record>
+
+        <record id="hr_employee_dw_search" model="ir.ui.view">
+        <field name="name">hr.employee.search.dw.inherit</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//search/field[@name='name']" position="before">
+          <!-- This field will show up on the quick search -->
+                <field name="matricule_dw"/>
+            </xpath>
+
+        </field>
+    </record>
 
         <record id="action_hr_timesheet_cms" model="ir.actions.act_window">
             <field name="name">Feuille de Temps CMS</field>
