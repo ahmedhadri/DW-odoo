@@ -38,7 +38,7 @@
                 </xpath>
 		
                 <xpath expr="//field[@name='department_id']" position="before">
-                            <field name="company_id"/>
+                            <field name="dw_company_id"/>
                 </xpath>
 
                 <xpath expr="//field[@name='address_home_id']" position="after">
