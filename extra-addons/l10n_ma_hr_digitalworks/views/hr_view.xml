@@ -215,7 +215,7 @@
             </field>
         </record>
 
-        <!-- hr.dw.category -->
+        <!-- hr.dw.grade -->
         <record id="view_hr_dw_grade_form" model="ir.ui.view">
             <field name="name">hr.emp.dw.grade.form</field>
             <field name="model">hr.employee.dw.grade</field>
@@ -238,6 +238,24 @@
                                 <field name="indimnite_panier"/>
                             </group>
                         </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- hr.dw.category -->
+        <record id="view_hr_dw_category_form" model="ir.ui.view">
+            <field name="name">hr.emp.dw.category.form</field>
+            <field name="model">hr.employee.dw.category</field>
+            <field name="arch" type="xml">
+                <form string="Catégorie Employé">
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="name" class="oe_edit_only"/>
+                            <h1>
+                                <field name="name"/>
+                            </h1>
+                        </div>
                     </sheet>
                 </form>
             </field>
@@ -284,7 +302,7 @@
 
 
         <record id="action_hr_emp_dw_grade" model="ir.actions.act_window">
-            <field name="name">Employee DW Grade</field>
+            <field name="name">Grade Employé DW </field>
             <field name="res_model">hr.employee.dw.grade</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
@@ -303,12 +321,33 @@
               </p>
             </field>
         </record>
+    <record id="action_hr_emp_dw_category" model="ir.actions.act_window">
+            <field name="name">Catégorie Employé</field>
+            <field name="res_model">hr.employee.dw.category</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to define a new Category Employee.
+              </p><p>
+                Category Employee are used to define categories of employees.
+                You can keep track of the number of employees you have per category
+                and follow the evolution according to what you planned
+                for the future.
+              </p>
+            </field>
+        </record>
 
         <menuitem
             action="action_hr_emp_dw_grade"
             id="menu_hr_dw_grade_job"
             parent="hr.menu_human_resources_configuration"
         />
+        <menuitem
+                action="action_hr_emp_dw_category"
+                id="menu_hr_dw_category_employee"
+                parent="hr.menu_human_resources_configuration"
+            />
 
 
 
