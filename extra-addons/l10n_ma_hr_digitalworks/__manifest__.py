@@ -12,6 +12,7 @@
     'depends': ['hr_payroll','l10n_ma_hr_payroll_10Basic'],
     'images': ['images/digital_works_logo.png'],
     'data': [
+             'cron/cron.xml',
              'security/hr_payslip_security.xml',
              'views/report_payslip.xml',
              'views/hr_view.xml',

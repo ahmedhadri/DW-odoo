@@ -46,7 +46,7 @@ class HrEmployee(models.Model):
             r.remaining_leaves = legal_leave.get_days(
                 r.id)[legal_leave.id]['remaining_leaves']
 
-    remaining_leaves = fields.Integer(
+    remaining_leaves = fields.Float(
         'Remaining Legal Leaves',
         compute='_compute_remaining_days',
         inverse='_inverse_remaining_days',

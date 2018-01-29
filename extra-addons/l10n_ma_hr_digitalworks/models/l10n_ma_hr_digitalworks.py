@@ -133,7 +133,7 @@ class HrEmployee(models.Model):
     date_expiration_passport = fields.Date('Date Expiration Passport')
     date_expiration_carte_sejour = fields.Date('Date Expiration Carte Sejour')
 
-    dw_company_id = fields.Many2one('res.company', string=u'Société', required=True,
+    dw_company_id = fields.Many2one('res.company', string=u'Société',
                                  default=lambda self: self.env.user.company_id)
 
     ##### CHECK LIST ####

@@ -10,7 +10,7 @@
             <field name="inherit_id" ref="hr_holidays.edit_holiday_new"/>
 			<field name="arch" type="xml">
 
-                    <xpath expr="//sheet/group/group/div/div[2]/field[@name='number_of_days_temp']" position="replace">
+                    <xpath expr="//sheet/group/group/div/div[2]/field[@name='number_of_days_temp']" position="before">
                         <div>
                             <field name="number_of_days_temp_2" class="oe_inline"/> jours
                         </div>
