@@ -289,7 +289,7 @@
                 <field name="model">hr.employee</field>
                 <field name="arch" type="xml">
                         <xpath expr="//field[@name='name']" position="after">
-                            <li><field name="matricule_dw"/></li>
+                            <ul><li><field name="matricule_dw"/></li></ul>
                         </xpath>
                 </field>
         </record>
