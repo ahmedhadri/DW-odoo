@@ -268,6 +268,21 @@
             </field>
         </record>
 
+        <record model="ir.ui.view" id="hr_employee_form_extension_3">
+            <field name="name">hr.employee form extension 3</field>
+            <field name="inherit_id" ref="hr_holidays.view_employee_form_leave_inherit"/>
+            <field name="model">hr.employee</field>
+            <field name="arch" type="xml">
+
+                <xpath expr="//group/label" position="before">
+                        <label for="leaves_count"/>
+                        <div>
+                            <field name="leaves_count" class="oe_inline"/> jours
+                        </div>
+                </xpath>
+            </field>
+        </record>
+
         <record model="ir.ui.view" id="hr_employee_kanban_extension">
                 <field name="name">hr.employee kanban extension</field>
                 <field name="inherit_id" ref="hr.hr_kanban_view_employees"/>
