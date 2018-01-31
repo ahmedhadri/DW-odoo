@@ -1,12 +1,12 @@
 {
-    'name': "Mass Import Customer Images",
+    'name': "Mass Import Images",
     'version': "1.0",
     'author': "Sythil",
     'category': "Tools",
-    'summary':"Imports a large amount of customer image files",
+    'summary':"Imports a large amount of image files",
     'license':'GPL-3',
     'data': [
-        'mass_customer_image_migrate.xml',
+        'mass_image_migrate.xml',
     ],
     'demo': [],
     'images':[
