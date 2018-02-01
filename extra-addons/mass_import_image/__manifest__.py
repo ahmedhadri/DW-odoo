@@ -1,7 +1,7 @@
 {
     'name': "Mass Import Images",
     'version': "1.0",
-    'author': "Sythil",
+    'author': "A.HADRI",
     'category': "Tools",
     'summary':"Imports a large amount of image files",
     'license':'GPL-3',
