@@ -66,7 +66,7 @@
           </field>
       </record>
 
-      <record model="ir.actions.act_window" id="mass_customer_image_migrate_action">
+      <record model="ir.actions.act_window" id="mass_image_migrate_action">
           <field name="name">Mass Import History</field>
           <field name="res_model">dw.migrate.image</field>
           <field name="view_type">form</field>
@@ -95,7 +95,7 @@
       <menuitem id="mcim_migrate" name="Import Images" parent="base.menu_administration" sequence="90"/>
       <menuitem id="mass_employee_image_migrate_wizard_menu" name="Import Employee Images" parent="mcim_migrate" action="mass_employee_image_migrate_wizard_action" sequence="90"/>
       <menuitem id="mass_user_image_migrate_wizard_menu" name="Import User Images" parent="mcim_migrate" action="mass_user_image_migrate_wizard_action" sequence="90"/>
-      <menuitem id="mass_customer_image_migrate_menu" name="Import History" parent="mcim_migrate" action="mass_customer_image_migrate_action" sequence="100"/>
+      <menuitem id="mass_image_migrate_menu" name="Import History" parent="mcim_migrate" action="mass_image_migrate_action" sequence="100"/>
       
   </data>
 </openerp>
