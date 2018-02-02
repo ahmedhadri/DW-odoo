@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <record model="ir.ui.view" id="hr_employee_doc_form_extension">
+            <field name="name">hr.employee form extension</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="model">hr.employee</field>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook/page[2]" position="after">
+                    <page string="Document Administratiiiif">
+                          <separator string="Collaborateur"/>
+                          <field name="all_documents">
+                              <tree editable="bottom">
+                                   <field name="document"/>
+                                   <field name="date_depot"/>
+                                   <field name="doc_attachment_id" widget="many2many_binary" class="oe_inline"/>
+                              </tree>
+                          </field>
+                          <separator string="Conjoint" attrs="{'invisible':[('marital', '!=', 'married')]}"/>
+                          <field name="conjoint_documents" attrs="{'invisible':[('marital', '!=', 'married')]}">
+                              <tree editable="bottom">
+                                   <field name="conjoint_document"/>
+                                   <field name="date_depot"/>
+                                   <field name="doc_attachment_id" widget="many2many_binary" class="oe_inline"/>
+                              </tree>
+                          </field>
+                          <separator string="Enfants" attrs="{'invisible':['|',('children', '=', 0),('marital', '=', 'single')]}"/>
+                          <field name="enfants_documents" attrs="{'invisible':['|',('children', '=', 0),('marital', '=', 'single')]}">
+                              <tree editable="bottom">
+                                   <field name="enfants_document"/>
+                                   <field name="date_depot"/>
+                                   <field name="doc_attachment_id" widget="many2many_binary" class="oe_inline"/>
+                              </tree>
+                          </field>
+                    </page>
+                </xpath>
+            </field>
+    </record>
+
+    <record model="ir.ui.view" id="hr_employee_document_form">
+         <field name="name">Document</field>
+         <field name="model">hr.employee.document</field>
+         <field name="arch" type="xml">
+             <form string="Document">
+                  <sheet>
+                      <group string="Collaborateur">
+                          <field name="document"/>
+                          <field name="date_depot"/>
+                          <field name="doc_attachment_id" widget="many2many_binary" class="oe_inline"/>
+                      </group>
+                  </sheet>
+              </form>
+          </field>
+      </record>
+    <record model="ir.ui.view" id="hr_employee_conjoint_document_form">
+         <field name="name">Document Conjoint</field>
+         <field name="model">hr.employee.conjoint.document</field>
+         <field name="arch" type="xml">
+             <form string="Document">
+                  <sheet>
+                      <group string="Conjoint">
+                          <field name="conjoint_document"/>
+                          <field name="date_depot"/>
+                          <field name="doc_attachment_id" widget="many2many_binary" class="oe_inline"/>
+                      </group>
+                  </sheet>
+              </form>
+          </field>
+      </record>
+    <record model="ir.ui.view" id="hr_employee_enfant_document_form">
+         <field name="name">Document</field>
+         <field name="model">hr.employee.enfant.document</field>
+         <field name="arch" type="xml">
+             <form string="Document">
+                  <sheet>
+                      <group string="Enfants">
+                          <field name="enfants_document"/>
+                          <field name="date_depot"/>
+                          <field name="doc_attachment_id" widget="many2many_binary" class="oe_inline"/>
+                      </group>
+                  </sheet>
+              </form>
+          </field>
+      </record>
+</odoo>

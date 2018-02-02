@@ -4,3 +4,4 @@
 
 import l10n_ma_hr_digitalworks
 import hr_holidays_extra
+import hr_employee_documents
