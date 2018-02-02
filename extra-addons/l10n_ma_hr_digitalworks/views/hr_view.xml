@@ -53,7 +53,6 @@
                 <xpath expr="//field[@name='identification_id']" position="attributes">
                             <attribute name="invisible">True</attribute>
                 </xpath>
-	
 
                 <xpath expr="//field[@name='passport_id']" position="after">
                             <field name="date_expiration_passport"/>
@@ -264,6 +263,9 @@
             <field name="arch" type="xml">
                     <xpath expr="//field[@name='bank_account_id']" position="attributes">
                         <attribute name="invisible">True</attribute>
+                    </xpath>
+                    <xpath expr="//field[@name='children']" position="attributes">
+                            <attribute name="attrs">{'invisible': [('marital', '=', 'single')]}</attribute>
                     </xpath>
             </field>
         </record>
